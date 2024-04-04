@@ -19,4 +19,5 @@ app.get("/health", (_req, res) => {
 
 
 const port = process.env.PORT || 4001;
-app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
+const service_name = process.env.SERVICE_NAME || 'User service'
+app.listen(port, () => console.log(`${service_name} is running on http://localhost:${port}`));
