@@ -1,4 +1,44 @@
 version: "3.8"
-services: {}
-networks: {}
-volumes: {}
+services:
+  postgres:
+    image: postgres:13
+    restart: on-failure
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: hotel-booking
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "user", "-d", "hotel-booking"]
+      interval: 10s
+      timeout: 60s
+      retries: 5
+    networks:
+      - hotel-booking-networks
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: on-failure
+    depends_on:
+      - postgres
+    ports:
+      - "5433:80"
+      - "5051:443"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    networks:
+      - hotel-booking-networks
+    volumes:
+      - pg_admin:/var/lib/pgadmin
+
+networks:
+  hotel-booking-networks:
+    driver: bridge
+
+volumes:
+  postgres:
+  pg_admin:
