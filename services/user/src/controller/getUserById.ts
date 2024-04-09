@@ -2,6 +2,8 @@ import prisma from "@/prisma";
 import { User } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 
+// /users/:id?field=id|authUserId
+
 const getUserById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
