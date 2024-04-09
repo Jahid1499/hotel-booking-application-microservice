@@ -1,3 +1,4 @@
-// export { default as userLogin } from '@/controller/userLogin';
+export { default as getEmails } from '@/controller/getEmails';
+export { default as sendEmail } from '@/controller/sentEmail';
 
 
