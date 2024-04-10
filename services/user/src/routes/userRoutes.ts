@@ -1,8 +1,9 @@
-import { createUser, getUserById, updateUser } from '@/controller';
+import { createUser, getUserById, getUsers, updateUser } from '@/controller';
 import express from 'express';
 
 const userRouter = express.Router();
 
+userRouter.get('/users', getUsers)
 userRouter.post('/users', createUser)
 userRouter.get('/users/:id', getUserById)
 userRouter.put('/users/:id', updateUser)

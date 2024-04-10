@@ -38,7 +38,7 @@ services:
   mailhog:
     image: mailhog/mailhog
     ports:
-      - "5050:80"
+      - "1025:1025"
       - "8025:8025"
     volumes:
       - mailhog:/var/lib/mailhog

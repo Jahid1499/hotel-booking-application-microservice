@@ -1,4 +1,3 @@
-// export const USER_SERVICE = process.env.USER_SERVICE_URL || "http://localhost:4001"; 
 import nodemailer from 'nodemailer';
 
 export const transporter = nodemailer.createTransport({

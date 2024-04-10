@@ -15,11 +15,11 @@ const getUserById = async (req: Request, res: Response, next: NextFunction) => {
             user = await prisma.user.findUnique({
                 where: { authUserId: id }
             })
+        } else {
+            user = await prisma.user.findUnique({
+                where: { id: id }
+            })
         }
-
-        user = await prisma.user.findUnique({
-            where: { id: id }
-        })
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
