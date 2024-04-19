@@ -1,0 +1,23 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install --frozen-lockfile
+
+COPY . .
+
+RUN npm run build
+
+ENV PORT 4002
+ENV SERVICE_NAME "Auth service"
+ENV DATABASE_URL "postgresql://user:password@localhost:5432/auth_db?schema=public"
+
+ENV USER_SERVICE_URL "http://localhost:4001"
+ENV EMAIL_SERVICE_URL "http://localhost:4003"
+ENV JWT_SECRET "supersecretjwtkey"
+
+EXPOSE 4002
+
+CMD ["npm", "run", "dev"]

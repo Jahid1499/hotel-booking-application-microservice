@@ -2,15 +2,18 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
 RUN npm install --frozen-lockfile
 
 COPY . .
 
+RUN npm run build
+
 ENV PORT 4001
+ENV SERVICE_NAME "User service"
 ENV DATABASE_URL "postgresql://user:password@localhost:5432/user_db?schema=public"
 
 EXPOSE 4001
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "build"]
