@@ -12,7 +12,6 @@ const deleteHotel = async (req: Request, res: Response, next: NextFunction) => {
             }
         });
 
-
         res.status(200).json({ message: 'Hotel successfully deleted' });
     } catch (error) {
         next(error);

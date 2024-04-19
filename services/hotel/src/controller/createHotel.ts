@@ -1,7 +1,8 @@
 import prisma from '@/prisma';
-import { HotelCreateSchema } from '@/schemas';
+import { FacilitiesSchema, HotelCreateSchema } from '@/schemas';
 import cloudinary from "cloudinary";
 import { NextFunction, Request, Response } from 'express';
+import { z } from 'zod';
 
 const createHotel = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -25,6 +26,24 @@ const createHotel = async (req: Request, res: Response, next: NextFunction) => {
             }
         });
 
+        const facilities = z.array(FacilitiesSchema).safeParse(req.body.facilities)
+        if (!facilities.success) {
+            return res.status(400).json({ errors: facilities.error.errors });
+        }
+
+        if (facilities.data.length === 0) {
+            return res.status(400).json({ message: 'Facilities is empty' });
+        }
+
+        facilities.data.map(async (item) => {
+            await prisma.facilities.create({
+                data: {
+                    hotel_id: hotel.id,
+                    facilities: item.facilities,
+                }
+            })
+        })
+
         const imageFiles = req.files as Express.Multer.File[];
         await uploadImages(imageFiles, hotel.id);
 
@@ -32,7 +51,6 @@ const createHotel = async (req: Request, res: Response, next: NextFunction) => {
             message: 'Hotel successfully created',
             hotel,
         });
-
 
     } catch (error) {
         next(error);

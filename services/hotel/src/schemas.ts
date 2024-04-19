@@ -17,3 +17,9 @@ export const HotelCreateSchema = z.object({
 });
 
 export const HotelUpdateSchema = HotelCreateSchema.omit({ userId: true }).partial();
+
+
+export const FacilitiesSchema = z.object({
+    facilities: z.string(),
+    hotel_id: z.string(),
+});
