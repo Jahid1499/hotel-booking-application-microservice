@@ -14,6 +14,10 @@ const getHotelById = async (req: Request, res: Response, next: NextFunction) => 
             }
         });
 
+        if (!hotel) {
+            return res.status(404).json({ message: 'Hotel not found' });
+        }
+
         return res.status(200).json({ status: 'success', hotel });
 
     } catch (error) {
