@@ -1,23 +1,10 @@
+import { z } from "zod";
 
+export const ReviewCreateSchema = z.object({
+    hotelId: z.string(),
+    userId: z.string(),
+    review: z.string(),
+    starRating: z.number().min(1).max(5),
+});
 
-// export const HotelCreateSchema = z.object({
-//     userId: z.string(),
-//     name: z.string(),
-//     address: z.string(),
-//     city: z.string(),
-//     country: z.string(),
-//     description: z.string(),
-//     adult_count: z.number().min(1),
-//     child_count: z.number().min(0).default(0),
-//     price_per_night: z.number(),
-//     start_rating: z.number().min(1).max(5),
-//     type: z.nativeEnum(Type)
-// });
-
-// export const HotelUpdateSchema = HotelCreateSchema.omit({ userId: true }).partial();
-
-
-// export const FacilitiesSchema = z.object({
-//     facilities: z.string(),
-//     hotel_id: z.string(),
-// });
+export const ReviewUpdateSchema = ReviewCreateSchema.omit({ hotelId: true, userId: true }).partial();

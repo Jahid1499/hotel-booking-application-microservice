@@ -1,3 +1,4 @@
+import reviewRoutes from '@/routes/reviewRoutes';
 
 import cors from "cors";
 import dotenv from 'dotenv';
@@ -20,6 +21,7 @@ app.get('/health', (_req, res) => {
 });
 
 // Routes
+app.use(reviewRoutes);
 
 
 // 404 error handler
@@ -35,6 +37,6 @@ app.use((err, _req, res, _next) => {
 });
 
 const port = process.env.PORT || 4006;
-const service_name = process.env.SERVICE_NAME || 'Hotel service';
+const service_name = process.env.SERVICE_NAME || 'Review service';
 
 app.listen(port, () => console.log(`${service_name} running on http://localhost:${port}`));
