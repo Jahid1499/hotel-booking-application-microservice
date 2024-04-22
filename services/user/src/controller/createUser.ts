@@ -12,8 +12,6 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
             return res.status(400).json({ errors: parseData.error.errors })
         }
 
-        // return res.status(400).json(parseData)
-
         // check user exists
         const userIsExists = await prisma.user.findUnique({
             where: { authUserId: parseData.data.authUserId }
