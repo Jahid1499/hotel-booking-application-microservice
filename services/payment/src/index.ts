@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from 'dotenv';
 import express from "express";
 import morgan from "morgan";
+import payment from "./routes/paymentRoutes";
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ app.get("/health", (_req, res) => {
 })
 
 // Routes
-app.use();
+app.use(payment);
 
 // 404 error handler
 app.use((_req, res) => {
@@ -34,6 +35,6 @@ app.use((err, _req, res, _next) => {
 
 
 // Start the server
-const port = process.env.PORT || 4001;
-const service_name = process.env.SERVICE_NAME || 'User service'
+const port = process.env.PORT || 4007;
+const service_name = process.env.SERVICE_NAME || 'Payment service'
 app.listen(port, () => console.log(`${service_name} is running on http://localhost:${port}`));

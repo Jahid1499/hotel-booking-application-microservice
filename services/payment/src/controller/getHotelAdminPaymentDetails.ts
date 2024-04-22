@@ -1,11 +1,11 @@
 import prisma from '@/prisma';
 import { NextFunction, Request, Response } from 'express';
 
-const getInvoice = async (req: Request, res: Response, next: NextFunction) => {
+const getHotelAdminPaymentDetails = async (req: Request, res: Response, next: NextFunction) => {
     try {
 
-        const { id } = req.params;
-        const payment = await prisma.payment.findUnique({ where: { id } });
+        const { hotelId } = req.params;
+        const payment = await prisma.payment.findMany({ where: { hotelId } });
 
         if (!payment) {
             return res.status(404).json({ message: "Payment not found" })
@@ -18,4 +18,4 @@ const getInvoice = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
-export default getInvoice;
+export default getHotelAdminPaymentDetails;
