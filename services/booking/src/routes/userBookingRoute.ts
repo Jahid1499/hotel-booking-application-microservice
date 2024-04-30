@@ -4,8 +4,8 @@ import express from 'express';
 
 const userHotelBooking = express.Router();
 
-userHotelBooking.get('/admin/booked-room', bookHotel)
-userHotelBooking.get('/admin/free-room', bookingDetails)
-userHotelBooking.get('/admin/free-room', getMyBookingList)
+userHotelBooking.post('/user/booked-hotel', bookHotel)
+userHotelBooking.get('/user/booking-details/:id', bookingDetails)
+userHotelBooking.get('/user/my-booking', getMyBookingList)
 
 export default userHotelBooking;
