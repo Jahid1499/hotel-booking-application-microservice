@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from 'dotenv';
 import express from "express";
 import morgan from 'morgan';
+import adminHotelBooking from "./routes/adminBookingRoutes";
+import userHotelBooking from "./routes/userBookingRoute";
 
 dotenv.config();
 
@@ -21,7 +23,8 @@ app.get('/health', (_req, res) => {
 });
 
 // Routes
-
+app.use(adminHotelBooking)
+app.use(userHotelBooking)
 
 
 // 404 error handler
